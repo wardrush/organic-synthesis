@@ -4,35 +4,48 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
+#include <conio.h>
 //#include <sstream>
 
 
 int main() 
 {
-	string line; // Holds the line in the file
-	string element; //The variable for the element being searched
+	std::string line; // Holds the line in the file
+	std::string element; //The variable for the element being searched
 
-	ofstream myfile ("AtomicMasses.csv"); // Opens the file
+
+	//This temporarily allows for an element to be entered for testing. 
+	std::cin >> element;
+	//This should be removed after testing
+
+
+	ofstream myfile ("AtomicMasses.csv"); //XKCD Undelclared Identifier
 
 	if (myfile.is_open())
 	{
 		while (myfile.good()) // The resources I found online had this. Not quite sure of the nuances, but it seems to work
 		{
-			getline(myfile, line);// Gets the current line in the file
-			if (element == line)
+			getline(myfile, line);
+			if (std::string::find(element) != 0);
 			{
-				//Find a way to search through the different columns of a csv file for the atomic mass
+				//Function that finds a certain element in the line (in this case, the third)
+				std::string::columnValue;
+					for (i = 1, i <= 3, i++);
+				{
+					std::string::find(",");
+
+				}
+				
+				
 			}
 		}
 	}
-
-		myfile.close();
-
-
 	else 
 	{
 		std::cout << "Unable to open file\n";
 	}
+		myfile.close(); //Closes the file
+	
+	_getch();
 
 	return 0;
-}
