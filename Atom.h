@@ -6,6 +6,12 @@
 #ifndef ORGOMATIC_ATOM_H
 #define ORGOMATIC_ATOM_H
 
+struct notAnAtom:std::exception{
+    char const *what() const noexcept{
+        return "That is not an atom";
+    }
+};
+
 class Atom
 {
 private:
@@ -16,6 +22,7 @@ private:
     bool allylic; //True if in an allylic position, false otherwise
     bool benzylic;// True if in an benzylic position, false otherwise
     int formalCharge; // Records the formal charge of the atom
+    std::string organics[]{"C", "O", "Cl", "Br", "F", "N", "B", "P", "I"};
 public:
     //default constructor
     Atom(): position(0), element("C"), hybridization(3), allylic(false), benzylic(false),
@@ -39,6 +46,16 @@ public:
     void setHybrid(size_t h) {hybridization = h;}
     // position mutator
     void setPos(size_t p) {position = p;}
+    // test to see if atom is among B, C, N, O, P, S, F, Cl, Br, and I
+    bool isOrganic();
 };
+
+bool Atom::isOrganic()
+{
+    for(int i = 0; i < 9; i++)
+        if(element == organics[i])
+            return true;
+    return false;
+}
 
 #endif //ORGOMATIC_ATOM_H
