@@ -1,51 +1,44 @@
 // MolarMass.cpp
 // This program should loop through the csv file Atomic Masses.csv and sum the masses of elements
-#include <iostream>
+
 #include <fstream>
+#include <iostream>
 #include <string>
-#include <stdlib.h>
 #include <conio.h>
-//#include <sstream>
 
 
-int main() 
-{
-	std::string line; // Holds the line in the file
-	std::string element; //The variable for the element being searched
+int main() {
 
+double runningSum = 0;
+std::string identifier; //Make this value the value from the SMILE
 
-	//This temporarily allows for an element to be entered for testing. 
-	std::cin >> element;
-	//This should be removed after testing
+std::string symbol, atmMass, name, atmNum;
+std::ifstream myfile("C:\Users\Ward Rushton\Documents\Visual Studio 2015\Repos\organic-synthesis\AtomicMasses.csv");
 
+if (myfile.good()) {
+while (getline(myfile, symbol, ',')) {
+	std::cout << "Symbol: " << symbol << " ";
 
-	ofstream myfile ("AtomicMasses.csv"); //XKCD Undelclared Identifier
+	getline(myfile, atmMass, ',');
+	std::cout << "Atomic Mass: " << atmMass << " ";
 
-	if (myfile.is_open())
-	{
-		while (myfile.good()) // The resources I found online had this. Not quite sure of the nuances, but it seems to work
-		{
-			getline(myfile, line);
-			if (std::string::find(element) != 0);
-			{
-				//Function that finds a certain element in the line (in this case, the third)
-				std::string::columnValue;
-					for (i = 1, i <= 3, i++);
-				{
-					std::string::find(",");
+	getline(myfile, name, ',');
+	std::cout << "name: " << name << " ";
 
-				}
-				
-				
-			}
-		}
-	}
-	else 
-	{
-		std::cout << "Unable to open file\n";
-	}
-		myfile.close(); //Closes the file
+		getline(myfile, atmNum);
+	std::cout << "Atomic Number: " << atmNum << " ";
+}
+
+//Make an array or find some way of storing these values to search through
 	
-	_getch();
+myfile.close();
 
-	return 0;
+}
+else std::cout << "Error\n";
+
+_getch();
+return 0;
+
+}
+
+
