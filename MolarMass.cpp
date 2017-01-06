@@ -4,41 +4,46 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <conio.h>
 
 
 int main() {
 
-double runningSum = 0;
+	double runningSum, atmMass, atmNum;
 std::string identifier; //Make this value the value from the SMILE
 
-std::string symbol, atmMass, name, atmNum;
-std::ifstream myfile("C:\Users\Ward Rushton\Documents\Visual Studio 2015\Repos\organic-synthesis\AtomicMasses.csv");
+std::string symbol, name;
+std::ifstream elementInfo("AtomicMasses.csv");
 
-if (myfile.good()) {
-while (getline(myfile, symbol, ',')) {
-	std::cout << "Symbol: " << symbol << " ";
+identifier = "H";
 
-	getline(myfile, atmMass, ',');
-	std::cout << "Atomic Mass: " << atmMass << " ";
+if (elementInfo.good()) {
+	while (getline(elementInfo, symbol, ',')) {
+		getline(elementInfo, atmMass, ',');
+		getline(elementInfo, name, ',');
+		getline(elementInfo, atmNum);
 
-	getline(myfile, name, ',');
-	std::cout << "name: " << name << " ";
+		if (symbol == identifier) {
+			runningSum += atmMass;
+		}
+		else{} //null	
 
-		getline(myfile, atmNum);
-	std::cout << "Atomic Number: " << atmNum << " ";
 }
 
 //Make an array or find some way of storing these values to search through
 	
-myfile.close();
+elementInfo.close();
 
 }
-else std::cout << "Error\n";
 
-_getch();
+else {
+	std::cout << "Error\n";
+}
+
+std::cout << runningSum;
+
 return 0;
 
 }
+
 
 
