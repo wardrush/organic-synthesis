@@ -5,27 +5,27 @@
 #include <iostream>
 #include <string>
 
-
 int main() {
 
-	double runningSum, atmMass, atmNum;
+double runningSum;
+double atmMass;
+double atmNum;
 std::string identifier; //Make this value the value from the SMILE
-
 std::string symbol, name;
-std::ifstream elementInfo("AtomicMasses.csv");
+std::ifstream elementInfo("AtomicMasses.csv"); //Specifying file to be opened as variable elementInfo
 
-identifier = "H";
 
 if (elementInfo.good()) {
 	while (getline(elementInfo, symbol, ',')) {
 		getline(elementInfo, atmMass, ',');
 		getline(elementInfo, name, ',');
-		getline(elementInfo, atmNum);
-
-		if (symbol == identifier) {
-			runningSum += atmMass;
-		}
-		else{} //null	
+		getline(elementInfo, atmNum, ' ');
+	}
+	if (symbol == identifier) {
+		runningSum += atmMass;
+	}
+}
+		else {} //null
 
 }
 
@@ -44,6 +44,8 @@ std::cout << runningSum;
 return 0;
 
 }
+
+
 
 
 
