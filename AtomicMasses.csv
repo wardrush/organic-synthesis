@@ -86,43 +86,7 @@ Po,209,Polonium,84
 At,210,Astatine,85
 Rn,222,Radon,86
 Fr,223,Francium,87
-Ra,226,Rd::string symbol, name, atmNum;
-	std::ifstream elementInfo("AtomicMasses.csv"); //Specifying file to be opened as variable elementInfo
-	elementInfo.open("");
-
-	if (elementInfo.good()) 
-	{
-		while (!elementInfo.eof())
-		{
-
-
-			getline(elementInfo, symbol, ',');
-			
-			//getline(elementInfo, name, ',');
-			//getline(elementInfo, atmNum, ' ');
-
-			if (symbol == identifier)
-			{
-				elementInfo >> atmMass;
-				runningSum += atmMass;
-			}
-			else {} //null
-		}
-	}
-	else {
-		std::cerr << "Error/n";
-	}
-	//Make an array or find some way of storing these values to search through
-	
-	elementInfo.close();
-
-	//std::cout << runningSum;
-	_getch();
-	return 0;
-
-
-}
-adium,88
+Ra,226,Radium,88
 Ac,227,Actinium,89
 Pa,231.0359,Protactinium,91
 Th,232.0381,Thorium,90
