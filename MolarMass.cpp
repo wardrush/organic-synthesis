@@ -4,48 +4,49 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <conio.h>
 
-int main() {
+int main() 
+{
 
-double runningSum;
-double atmMass;
-double atmNum;
-std::string identifier; //Make this value the value from the SMILE
-std::string symbol, name;
-std::ifstream elementInfo("AtomicMasses.csv"); //Specifying file to be opened as variable elementInfo
+	double runningSum = 0, atmMass;
+	std::string identifier; //Make this value the value from the SMILE
+	identifier = 'H';
+	std::string symbol, name, atmNum;
+	std::ifstream elementInfo("AtomicMasses.csv"); //Specifying file to be opened as variable elementInfo
+	elementInfo.open("");
+
+	if (elementInfo.good()) 
+	{
+		while (!elementInfo.eof())
+		{
 
 
-if (elementInfo.good()) {
-	while (getline(elementInfo, symbol, ',')) {
-		getline(elementInfo, atmMass, ',');
-		getline(elementInfo, name, ',');
-		getline(elementInfo, atmNum, ' ');
+			getline(elementInfo, symbol, ',');
+			
+			//getline(elementInfo, name, ',');
+			//getline(elementInfo, atmNum, ' ');
+
+			if (symbol == identifier)
+			{
+				elementInfo >> atmMass;
+				runningSum += atmMass;
+			}
+			else {} //null
+		}
 	}
-	if (symbol == identifier) {
-		runningSum += atmMass;
+	else {
+		std::cerr << "Error/n";
 	}
-}
-		else {} //null
-
-}
-
-//Make an array or find some way of storing these values to search through
+	//Make an array or find some way of storing these values to search through
 	
-elementInfo.close();
+	elementInfo.close();
+
+	//std::cout << runningSum;
+	_getch();
+	return 0;
+
 
 }
-
-else {
-	std::cout << "Error\n";
-}
-
-std::cout << runningSum;
-
-return 0;
-
-}
-
-
-
 
 
