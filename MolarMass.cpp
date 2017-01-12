@@ -5,40 +5,41 @@
 #include <iostream>
 #include <string>
 
-int main() 
+int main()
 {
 
-	double runningSum = 0, atmMass;
-	std::string identifier; //Make this value the value from the SMILE
-	identifier = 'H';
-	std::string symbol, name, atmNum, str;
-	std::ifstream elementInfo("atomicmasses.txt"); //Specifying file to be opened as variable elementInfo
-	//elementInfo.open("");
+    double runningSum = 0, atmMass;
+    std::string identifier; //Make this value the value from the SMILE
+    identifier = 'H';
+    std::string symbol, name, atmNum, str;
+    std::ifstream elementInfo; //Specifying file to be opened as variable elementInfo
+    elementInfo.open("AtomicMasses");
 
-	if (!elementInfo) 
-	{
-		std::cout << "Error reading file\n";
-		getline(std::cin, str);
-		std::cin.get();
-		exit(1);
-	}
+    if (!elementInfo)
+    {
+        std::cout << "Error reading file\n";
+        getline(std::cin, str);
+        std::cin.get();
+        exit(1);
+    }
 
-	while (!elementInfo.eof())
-	{
+    while (!elementInfo.eof())
+    {
+        getline(elementInfo, str, '\n');
+
+        elementInfo >> symbol;
+        //getline(elementInfo, name, ',');
+        //getline(elementInfo, atmNum, ' ');
 
 
-		getline(elementInfo, symbol, ',');
+        if (symbol == identifier)
+        {
+            std::cout << "hi";
+            elementInfo >> atmMass;
+            runningSum += atmMass;
+        }
+    }
+    std::cout << runningSum;
 
-		//getline(elementInfo, name, ',');
-		//getline(elementInfo, atmNum, ' ');
-
-		if (symbol == identifier)
-		{
-			elementInfo >> atmMass;
-			runningSum += atmMass;
-		}
-	}
-
-	elementInfo.close();
-	std::cin.get();	
+    elementInfo.close();
 }
