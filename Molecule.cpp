@@ -6,10 +6,11 @@
 
 Molecule::Molecule()
 {
-
+    Branch b;
+    b.branchSMILES= "l";
 }
 
-Molecule::Molecule(std::string s): SMILES(s)
+Molecule::Molecule(std::string simpleSMILES): SMILES(simpleSMILES)
 {
     convertToMolecule(SMILES);
 }
@@ -42,35 +43,39 @@ void Molecule::convertToMolecule(std::string SMILES)
 }
 bool Molecule::isSimple(std::string simpleSMILES)
 {
-    return  true;
+    for(size_t i = 0; i < simpleSMILES.length(); i++)
+        if(simpleSMILES[i] == '(')
+            return false;
+    return true;
 }
 void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
 {
-    /* std::string tmpAtom;
+    std::string tmpAtom;
     char step;
 
-    for(int i = 0; i < s.size(); i++)
+    for(int i = 0; i < simpleSMILES.size(); i++)
     {
         tmpAtom = "";
-        step = s[i];
+        step = simpleSMILES[i];
         if(isalpha(step))
         {
-            if(i+1 < s.size())
+            if(i+1 < simpleSMILES.size())
             {
-                if(s[i+1] == 'l' || s[i+1] == 'r')
+                if(simpleSMILES[i+1] == 'l' || simpleSMILES[i+1] == 'r')
                 {
-                    tmpAtom = s[i];
-                    tmpAtom += s[i+1];
+                    tmpAtom = simpleSMILES[i];
+                    tmpAtom += simpleSMILES[i+1];
                 }
                 else
-                    tmpAtom = s[i];
+                    tmpAtom = simpleSMILES[i];
             }
             else
-                    tmpAtom = s[i];
+                    tmpAtom = simpleSMILES[i];
             if(isOrganic(tmpAtom))
             {
-                Atom a(tmpAtom, 3, size_t(i), 0);
+                Atom a(tmpAtom, pos, 3, 0);
                 atomList.push_back(a);
+                pos++;
             }
             else
                 throw notAnAtom();
@@ -79,25 +84,32 @@ void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
         }
         else if(step == '[') //problems with where the cursor is
         {
-            tmpAtom = s[i+1];
+            tmpAtom = simpleSMILES[i+1];
             i++;
-            while(s[i+1] != ']')
+            while(simpleSMILES[i+1] != ']')
             {
-                if(s[i+1] == 'H' && s[i+2] != 'o')
+                if(simpleSMILES[i+1] == 'H' && simpleSMILES[i+2] != 'o')
                 {
-                    for(size_t j = 0; j < s[i+2] - '0'; i++)
+                    if(isdigit(simpleSMILES[i+2]))
                     {
-                        Atom a("H", 1, i+1+j, 0);
+                        for (size_t j = 0; j < simpleSMILES[i + 2] - '0'; i++) {
+                            Atom a("H", pos, 0, 0);
+                            atomList.push_back(a);
+                            pos++;
+                        }
+                    }
+                    else
+                    {
+                        Atom a("H", pos, 0, 0);
                         atomList.push_back(a);
+                        pos++;
                     }
                 }
-                else if(isalpha(s[i+1]))
-                    tmpAtom += s[i+1];
-                else if(s[i+1] != ']')
-                    tmpAtom = "";
+                else if(isalpha(simpleSMILES[i+1]))
+                    tmpAtom += simpleSMILES[i+1];
             }
         }
-    }*/
+    }
 }
 std::vector<Branch> Molecule::filterBranching(std::string molecule)
 {
