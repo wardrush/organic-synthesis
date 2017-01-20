@@ -33,6 +33,12 @@ std::vector<Branch> filterBranching(std::string molecule)
 
     //Hint#1
     tmp.push_back(Branch()); //adds a Branch struct to the end of the vector
+    
+    for(int i = 0; i < molecule.size(); i++)
+        if(molecule[i] == '(') //accesses each character in the string and sees if it is the ( char
+        {
+            //do something
+        }
 
     //Hint#2
     tmp[0].branchPoint = -1; // tmp[0] is accessing the vector tmp at the index of 0,
