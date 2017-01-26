@@ -32,14 +32,19 @@ void Molecule::convertToMolecule(std::string SMILES)
         {
             simpleSMLIESconverter(branches[i].branchSMILES);
             //manually attach
+            if(atomList.size() > 0)
+                bonds.formBond(atomList.size() - 1, atomList.size() - branches[i].branchPoint);
         }
         else
         {
             convertToMolecule(branches[i].branchSMILES);
             //manually attach
+            if(atomList.size() > 0)
+                bonds.formBond(atomList.size() - 1, atomList.size() - branches[i].branchPoint);
         }
         i++;
     }
+    fillInHydrogens();
 }
 bool Molecule::isSimple(std::string simpleSMILES)
 {
@@ -73,41 +78,46 @@ void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
                     tmpAtom = simpleSMILES[i];
             if(isOrganic(tmpAtom))
             {
-                Atom a(tmpAtom, pos, 3, 0);
+                Atom a(tmpAtom, atomList.size(), 3, 0);
                 atomList.push_back(a);
-                pos++;
+                bonds.addPoint();
+                if(atomList.size() > 0)
+                    bonds.formBond(atomList.size() - 1, atomList.size() - 2);
             }
             else
                 throw notAnAtom();
             if(tmpAtom.size() > 1)
                 i++;
         }
-        else if(step == '[') //problems with where the cursor is
+        else if(step == '[') //[NH2+]
         {
             tmpAtom = simpleSMILES[i+1];
             i++;
+            int charge = 0;
             while(simpleSMILES[i+1] != ']')
             {
-                if(simpleSMILES[i+1] == 'H' && simpleSMILES[i+2] != 'o')
+                if(simpleSMILES[i+1] == '+' || simpleSMILES[i+1] == '-')
                 {
                     if(isdigit(simpleSMILES[i+2]))
-                    {
-                        for (size_t j = 0; j < simpleSMILES[i + 2] - '0'; i++) {
-                            Atom a("H", pos, 0, 0);
-                            atomList.push_back(a);
-                            pos++;
-                        }
-                    }
+                        charge = simpleSMILES[i+2] - '0';
                     else
-                    {
-                        Atom a("H", pos, 0, 0);
-                        atomList.push_back(a);
-                        pos++;
-                    }
+                        charge = 1;
+                    if(simpleSMILES[i+1] == '-')
+                        charge *= -1;
+                }
+                if(simpleSMILES[i+1] == 'H' && simpleSMILES[i+2] != 'o')
+                {
+                    //do nothing for now
                 }
                 else if(isalpha(simpleSMILES[i+1]))
                     tmpAtom += simpleSMILES[i+1];
+                i++;
             }
+            Atom a(tmpAtom, atomList.size(), 3, charge);
+            atomList.push_back(a);
+            bonds.addPoint();
+            if(atomList.size() > 0)
+                bonds.formBond(atomList.size() - 1, atomList.size() - 2);
         }
     }
 }
@@ -130,5 +140,5 @@ double Molecule::calculateMolecularWeight()
 
 bool Molecule::isOrganic(std::string a)
 {
-    return false;
+    return true;
 }
