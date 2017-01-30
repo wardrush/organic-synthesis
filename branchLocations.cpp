@@ -11,8 +11,8 @@ int main()
 {
 	std::string SMILES; //SMILES goes here
 
-	std::string startBranch = "(";
-	std::string endBranch = ")";
+	char startBranch = '(';
+	char endBranch = ')';
 
 
 	std::vector<int> startResults = locations(SMILES, startBranch);
@@ -25,11 +25,13 @@ int main()
 std::vector<int> locations(std::string testString, char testChar)
 {
 	std::vector<int> characterLocations;
-	for (int i = 0; i = > testString.size(); i++);
+	for (int i = 0; i < testString.size(); i++)
+	{
 		if (testString[i] == testChar)
 		{
 			characterLocations.push_back(i); // gives the indicies of the instances of the chosen characters
 		}
+	}
 	return characterLocations;
 
 }
