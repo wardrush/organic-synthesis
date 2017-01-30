@@ -7,7 +7,7 @@
 struct Branch
 {
     std::string branchSMILES; // The SMILES representation of the branch
-    int branchPoint; // index of the point where the branch connects to the parent branch
+    int branchPoint = -1; // index of the point where the branch connects to the parent branch
     // value is -1 if parent branch
 };
 
@@ -20,7 +20,7 @@ std::vector<Branch> filterBranching(std::string molecule);
 int main()
 {
     std::vector<Branch> branches;
-    branches = filterBranching("CC(CCC(C)=O)CCC(C)C(C(C)C)C");
+    branches = filterBranching("CC(CCC(C)=O)CCC(C)C(C(C)C)C"); //for testing
 
     for(int i = 0; i < branches.size(); i++)
         std::cout << branches[i].branchSMILES << ", " << branches[i].branchPoint << "\n";
@@ -29,6 +29,7 @@ int main()
 std::vector<Branch> filterBranching(std::string molecule)
 {
     std::vector<Branch> tmp;
+	std::string tmpBranch;
     //your code here
 
     //Hint#1
