@@ -3,6 +3,7 @@
 //
 
 #include "Molecule.h"
+#include <cmath>
 
 Molecule::Molecule()
 {
@@ -131,7 +132,21 @@ std::vector<Branch> Molecule::filterBranching(std::string molecule)
 }
 void Molecule::fillInHydrogens()
 {
-
+    for(size_t i = 0; i < atomList.size(); i++)
+    {
+        //the hybrid stored in the atom is the hybrid it is supposed to be while the bonds store what it currently is
+        if(bonds.checkHybrid(i) < atomList[i].getHybrid())
+        {
+            double numH = atomList[i].getHybrid() - bonds.checkHybrid(i) + std::abs(atomList[i].getFormalCharge());
+            for(int j = 0; j < numH; j++)
+            {
+                Atom a("H", atomList.size(), 0, 0);
+                atomList.push_back(a);
+                bonds.addPoint();
+                bonds.formBond(i, atomList.size() - 1);
+            }
+        }
+    }
 }
 double Molecule::calculateMolecularWeight()
 {
