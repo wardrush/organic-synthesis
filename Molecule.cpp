@@ -58,6 +58,8 @@ void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
 {
     std::string tmpAtom;
     char step;
+    std::vector<size_t> doubles, triples, aromatics; // stores the locations of double,
+    // triple, and aromatic bonds respectively
 
     for(int i = 0; i < simpleSMILES.size(); i++)
     {
@@ -90,6 +92,15 @@ void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
             if(tmpAtom.size() > 1)
                 i++;
         }
+        else if(step == '=' || step == '#' || step == ':')
+        {
+            if(step == '=')
+                doubles.push_back(atomList.size() - 1);
+            else if(step == '#')
+                triples.push_back(atomList.size() - 1);
+            else
+                aromatics.push_back(atomList.size() - 1);
+        }
         else if(step == '[') //[NH2+]
         {
             tmpAtom = simpleSMILES[i+1];
@@ -121,6 +132,12 @@ void Molecule::simpleSMLIESconverter(std::string simpleSMILES)
                 bonds.formBond(atomList.size() - 1, atomList.size() - 2);
         }
     }
+    for(int i = 0; i < doubles.size(); i++)
+        bonds.alterBondValue(doubles[i], doubles[i] + 1, 2);
+    for(int i = 0; i < triples.size(); i++)
+        bonds.alterBondValue(triples[i], triples[i] + 1, 3);
+    for(int i = 0; i < aromatics.size(); i++)
+        bonds.alterBondValue(aromatics[i], aromatics[i] + 1, 4);
 }
 std::vector<Branch> Molecule::filterBranching(std::string molecule)
 {
@@ -155,5 +172,5 @@ double Molecule::calculateMolecularWeight()
 
 bool Molecule::isOrganic(std::string a)
 {
-    return true;
+    return a == "C" || a == "N" || a == "O" || a == "Br" || a == "Cl" || a == "F" || a == "I" || a == "S" || a =="P";
 }
