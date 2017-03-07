@@ -7,9 +7,10 @@
 
 std::vector<int> locations(std::string sample, char branch);
 
-int main()
-{
-	std::string SMILES; //SMILES goes here
+int main() {
+	std::cout << "Please input SMILES\n";
+	std::string SMILES;
+	std::cin >> SMILES; //SMILES goes here
 
 	char startBranch = '(';
 	char endBranch = ')';
@@ -17,13 +18,14 @@ int main()
 
 	std::vector<int> startResults = locations(SMILES, startBranch);
 	std::vector<int> endResults = locations(SMILES, endBranch);
+	
+
 
 	system("pause");
 	return 0;
 }
 
-std::vector<int> locations(std::string testString, char testChar)
-{
+std::vector<int> locations(std::string testString, char testChar) {
 	std::vector<int> characterLocations;
 	for (int i = 0; i < testString.size(); i++)
 	{
