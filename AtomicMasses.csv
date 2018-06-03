@@ -16,8 +16,8 @@
 15	P	30.9738	Phosphorus	15
 16	S	32.065	Sulfur	16
 17	Cl	35.453	Chlorine	17
-18	K	39.0983	Potassium	19
-19	Ar	39.948	Argon	18
+18	Ar	39.948	Argon	18
+19	K	39.0983	Potassium	19
 20	Ca	40.078	Calcium	20
 21	Sc	44.9559	Scandium	21
 22	Ti	47.867	Titanium	22
@@ -25,8 +25,8 @@
 24	Cr	51.9961	Chromium	24
 25	Mn	54.938	Manganese	25
 26	Fe	55.845	Iron	26
-27	Ni	58.6934	Nickel	28
-28	Co	58.9332	Cobalt	27
+27	Co	58.9332	Cobalt	27
+28	Ni	58.6934	Nickel	28
 29	Cu	63.546	Copper	29
 30	Zn	65.39	Zinc	30
 31	Ga	69.723	Gallium	31
@@ -50,8 +50,8 @@
 49	In	114.818	Indium	49
 50	Sn	118.71	Tin	50
 51	Sb	121.76	Antimony	51
-52	I	126.9045	Iodine	53
-53	Te	127.6	Tellurium	52
+52	Te	127.6	Tellurium	52
+53	I	126.9045	Iodine	53
 54	Xe	131.293	Xenon	54
 55	Cs	132.9055	Cesium	55
 56	Ba	137.327	Barium	56
@@ -88,12 +88,12 @@
 87	Fr	223	Francium	87
 88	Ra	226	Radium	88
 89	Ac	227	Actinium	89
-90	Pa	231.0359	Protactinium	91
-91	Th	232.0381	Thorium	90
-92	Np	237	Neptunium	93
-93	U	238.0289	Uranium	92
-94	Am	243	Americium	95
-95	Pu	244	Plutonium	94
+90	Th	232.0381	Thorium	90
+91	Pa	231.0359	Protactinium	91
+92	U	238.0289	Uranium	92
+93	Np	237	Neptunium	93
+94	Pu	244	Plutonium	94
+95	Am	243	Americium	95
 96	Cm	247	Curium	96
 97	Bk	247	Berkelium	97
 98	Cf	251	Californium	98
@@ -101,11 +101,21 @@
 100	Fm	257	Fermium	100
 101	Md	258	Mendelevium	101
 102	No	259	Nobelium	102
-103	Rf	261	Rutherfordium	104
-104	Lr	262	Lawrencium	103
+103	Lr	266	Lawrencium	103
+104	Rf	267	Rutherfordium	104
 105	Db	262	Dubnium	105
-106	Bh	264	Bohrium	107
-107	Sg	266	Seaborgium	106
-108	Mt	268	Meitnerium	109
-109	Rg	272	Roentgenium	111
-110	Hs	277	Hassium	108
+106	Sg	271	Seaborgium	106
+107	Bh	270	Bohrium	107
+108	Hs	269	Hassium	108
+109	Mt  278	Meitnerium	109
+110 Ds 281
+111	Rg 282	Roentgenium	111
+112 Cn 285
+113 Nh 286
+114 Fl 289
+115 Mc 289
+116 Lv 293
+117 Ts 294
+118 Og 294
+
+
